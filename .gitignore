@@ -1,5 +1,6 @@
 #Agregar archivos a ignorar.
 data/
+*.code-workspace
 *.csv
 *.json
 *.zip
