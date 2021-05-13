@@ -1,3 +1,14 @@
+#Agregar archivos a ignorar.
+data/
+*.csv
+*.json
+*.zip
+*.dat
+*.kmz
+*.gz
+*.nc
+*.stn
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
