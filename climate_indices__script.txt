@@ -15,3 +15,12 @@ ncks -d lat,14.25,32.75 -d lon,-118.75,-86.25 C:\Users\Rodrigo\Desktop\Research\
 
 --- Recorta la zona correspondiente a México para la evapotranspiración de 2011 a 2020 ---
 ncks -d lat,14.25,32.75 -d lon,-118.75,-86.25 C:\Users\Rodrigo\Desktop\Research\Program\sequia\data\CRU\cru_ts4.05.2011.2020.pet.dat.nc -O C:\Users\Rodrigo\Desktop\Research\Program\sequia\data\CRU\mexico_cru_ts4.05.2011.2020.pet.dat.nc
+
+
+ERA, CDS pass
+a1B#kn9e8gy4hg
+
+url: https://cds.climate.copernicus.eu/api/v2
+key: 88341:6218b4eb-c3bc-441e-98d0-06a41aaa022b
+
+get-appxpackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
