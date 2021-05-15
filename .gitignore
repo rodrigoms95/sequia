@@ -9,7 +9,7 @@ data/
 *.gz
 *.nc
 *.stn
-*.txt
+ERA.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
