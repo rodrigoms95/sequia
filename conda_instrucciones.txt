@@ -1,0 +1,28 @@
+Activar conda para Powershell (Windows):
+En la terminal de conda
+
+	conda init powershell
+
+Para usar geoviews:
+
+	conda create -n gv -c conda-forge python=3.7 geoviews
+	conda activate gv
+
+Para abrir la carpeta de archivos de WSL 2:
+	
+	explorer.exe .	
+
+Instalar conda (WSL 2):
+Anaconda3-2021.05-Linux-x86_64.sh en home/user/Anaconda/
+
+	sha256sum Anaconda/Anaconda3-2021.05-Linux-x86_64.sh
+	bash Anaconda/Anaconda3-2021.05-Linux-x86_64.sh
+
+Para usar climate_indices (WSL 2):
+	
+	sudo apt-get install aptitude
+	sudo aptitude install nco
+	conda create -n ci python=3.7
+	conda activate ci
+	pip install climate-indices
+	conda install -c conda-forge nco 
