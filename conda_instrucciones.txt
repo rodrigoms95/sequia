@@ -1,3 +1,7 @@
+Se recomienda usar VSCode como entorno de programación
+y Anaconda como intérprete de Windows,
+buscarlos en internet e instalar.
+
 Activar conda para Powershell (Windows):
 En la terminal de conda
 
@@ -5,14 +9,20 @@ En la terminal de conda
 
 Para usar geoviews:
 
-	conda create -n gv -c conda-forge python=3.7 geoviews
+	conda create -n gv
 	conda activate gv
+	conda install -c pyviz geoviews-core
+	conda install -c pyviz xarray
+
+Instalar WSL 2:
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 Para abrir la carpeta de archivos de WSL 2:
 	
 	explorer.exe .	
 
 Instalar conda (WSL 2):
+Descargar instalador para Linux
 Anaconda3-2021.05-Linux-x86_64.sh en home/user/Anaconda/
 
 	sha256sum Anaconda/Anaconda3-2021.05-Linux-x86_64.sh

@@ -18,7 +18,10 @@ ncks -d lat,14.25,32.75 -d lon,-118.75,-86.25 Climate_indices/cru_ts4.05.2011.20
 --- Renombrar las unidades en 'pre' a 'mm' ---
 ncatted -a units,pre,m,c,'mm' Climate_indices/mexico_cru_ts4.05.1901.2020.pre.dat.nc Climate_indices/mexico_cru.1901.2020.pre.mm.nc
 
------- Con cdo (Genérico) ------
+--- Renombrar las unidades en 'pet' a 'mm' ---
+ncatted -a units,pet,m,c,'mm' Climate_indices/mexico_cru_ts4.05.1901.2020.pet.dat.nc Climate_indices/mexico_cru.1901.2020.pet.mm.nc
+
+------ Recorta la zona correspondiente a México con cdo (Genérico, alternativa) ------
 sudo apt-get install cdo
 cdo sellonlatbox,lon1,lon2,lat1,lat2 infile.nc outfile.nc
 
@@ -28,6 +31,6 @@ cdo sellonlatbox,lon1,lon2,lat1,lat2 infile.nc outfile.nc
 process_climate_indices --index spi --periodicity monthly --netcdf_precip Climate_indices/mexico_cru.1901.2020.pre.mm.nc --var_name_precip pre --output_file_base Climate_indices/SPI --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020
 
 --- Calcula el SPEI ---
-process_climate_indices --index spei --periodicity monthly --netcdf_precip Climate_indices/mexico_cru_ts4.05.1901.2020.pre.dat.nc --var_name_precip pre --netcdf_pet Climate_indices/mexico_cru_ts4.05.1901.2020.pet.dat.nc --var_name_pet pet --output_file_base Climate_indices/SPEI --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020
+process_climate_indices --index spei --periodicity monthly --netcdf_precip Climate_indices/mexico_cru.1901.2020.pre.mm.nc --var_name_precip pre --netcdf_pet Climate_indices/mexico_cru.1901.2020.pet.mm.nc --var_name_pet pet --output_file_base Climate_indices/SPEI --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020
 
 home/rodrigoms95/Climate_indices/
