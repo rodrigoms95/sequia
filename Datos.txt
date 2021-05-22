@@ -1,2 +1,10 @@
 Datos del CRU:
 https://crudata.uea.ac.uk/cru/data/hrg/
+
+Límites México
+Lat:   14.25,  32.75
+Lon: -118.75, -86.25
+
+Límites Cuenca de México
+Lat:  19.25,  19.75
+Lon: -99.25, -98.75

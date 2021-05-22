@@ -28,9 +28,7 @@ cdo sellonlatbox,lon1,lon2,lat1,lat2 infile.nc outfile.nc
 ------ Con climate_indices ------
 
 --- Calcula el SPI ---
-process_climate_indices --index spi --periodicity monthly --netcdf_precip Climate_indices/mexico_cru.1901.2020.pre.mm.nc --var_name_precip pre --output_file_base Climate_indices/SPI --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020
+process_climate_indices --index spi --periodicity monthly --netcdf_precip Climate_indices/mexico_cru.1901.2020.pre.mm.nc --var_name_precip pre --output_file_base Climate_indices/mexico --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020
 
 --- Calcula el SPEI ---
-process_climate_indices --index spei --periodicity monthly --netcdf_precip Climate_indices/mexico_cru.1901.2020.pre.mm.nc --var_name_precip pre --netcdf_pet Climate_indices/mexico_cru.1901.2020.pet.mm.nc --var_name_pet pet --output_file_base Climate_indices/SPEI --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020
-
-home/rodrigoms95/Climate_indices/
+process_climate_indices --index spei --periodicity monthly --netcdf_precip Climate_indices/mexico_cru.1901.2020.pre.mm.nc --var_name_precip pre --netcdf_pet Climate_indices/mexico_cru.1901.2020.pet.mm.nc --var_name_pet pet --output_file_base Climate_indices/mexico --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020

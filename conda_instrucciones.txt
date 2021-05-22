@@ -13,6 +13,7 @@ Para usar geoviews:
 	conda activate gv
 	conda install -c pyviz geoviews-core
 	conda install -c pyviz xarray
+	conda install -c pyviz netcdf4
 
 Instalar WSL 2:
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
