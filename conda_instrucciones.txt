@@ -7,17 +7,6 @@ En la terminal de conda
 
 	conda init powershell
 
-Para usar geoviews:
-
-	conda create -n gv
-	conda activate gv
-	conda install -c pyviz geoviews-core
-	conda install -c pyviz xarray
-	conda install -c pyviz netcdf4
-	conda install -c pyviz geopandas
-
-	conda create -n gv3 -c pyviz geoviews-core xarray netcdf4 geopandas
-
 Instalar WSL 2:
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
@@ -40,3 +29,16 @@ Para usar climate_indices (WSL 2):
 	conda activate ci
 	pip install climate-indices
 	conda install -c conda-forge nco 
+
+Para usar geoviews (WSL2):
+
+	conda create -n gv
+	conda activate gv
+	conda config --env --add channels pyviz
+	conda config --env --set channel_priority strict
+	conda install python cartopy=0.18.0 geoviews
+
+usar git
+	sudo apt-get install git
+	git config --global user.email "you@example.com"
+	git config --global user.name "Your Name"
