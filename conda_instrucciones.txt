@@ -1,5 +1,5 @@
 Se recomienda usar VSCode como entorno de programación
-y Anaconda como intérprete de Windows,
+y Anaconda como intérprete de Python,
 buscarlos en internet e instalar.
 
 Activar conda para Powershell (Windows):
@@ -36,7 +36,7 @@ Para usar geoviews (WSL2):
 	conda activate gv
 	conda config --env --add channels pyviz
 	conda config --env --set channel_priority strict
-	conda install python cartopy=0.18.0 geoviews
+	conda install python cartopy=0.18.0 geoviews descartes
 
 usar git
 	sudo apt-get install git
