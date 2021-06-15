@@ -223,6 +223,7 @@ make -s -j 2
 make check
 sudo make -s -j 2 install
 cd $HOME
+sudo cp /usr/local/lib/libnetcdf.so.19 /usr/lib/x86_64-linux-gnu
 sudo rm netcdf-c-4.8.0.tar.gz
 sudo rm -r netcdf-c-4.8.0
 
@@ -234,6 +235,8 @@ cd openmpi-4.1.1
 ./configure --prefix=/usr/local
 sudo make -s -j 2 all install
 cd $HOME
+sudo cp /usr/local/lib/libopen-pal.so.40 /usr/lib
+sudo cp /usr/local/bin/* /usr/local/bin
 sudo rm openmpi-4.1.1.tar.gz
 sudo rm -r openmpi-4.1.1
 
@@ -287,9 +290,7 @@ sudo rm makefile
 sudo cp $HOME/flex_install/makefile makefile
 cd ..
 sudo cp -r src2 src3
-sudo cp /usr/local/lib/libnetcdf.so.19 /usr/lib/x86_64-linux-gnu
-sudo cp /usr/local/lib/libopen-pal.so.40 /usr/lib
-cd ../src2
+cd src2
 sudo make -s -j 2 ncf=yes
 cd ../src3
 sudo make -s -j 2 mpi ncf=yes
