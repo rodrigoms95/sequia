@@ -54,22 +54,22 @@ ifeq ($(gcc), 4.9)
 # Compiled libraries under user ~flexpart, gfortran v4.9
 	ROOT_DIR = /usr/local
 
-	F90       = /usr/bin/gfortran
-	MPIF90    = /usr/bin/mpifort
+	F90      = /usr/bin/gfortran
+	MPIF90   = /usr/bin/mpifort
          
-	INCPATH1  = /usr/include
-	INCPATH2 = 	/usr/local/include
+	INCPATH1 = /usr/include
+	INCPATH2 = /usr/local/include
 	LIBPATH1 = /usr/lib
 	LIBPATH2 = /usr/local/lib
 else 
 # Compiled libraries under user ~flexpart, gfortran v5.4
 	ROOT_DIR = /usr/local
 
-	F90       = /usr/bin/gfortran
-	MPIF90    = /usr/bin/mpifort
+	F90      = /usr/bin/gfortran
+	MPIF90   = /usr/bin/mpifort
          
-	INCPATH1  = /usr/include
-	INCPATH2 = 	/usr/local/include
+	INCPATH1 = /usr/include
+	INCPATH2 = /usr/local/include
 	LIBPATH1 = /usr/lib
 	LIBPATH2 = /usr/local/lib
 endif

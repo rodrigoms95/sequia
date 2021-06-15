@@ -2,6 +2,7 @@
 data/
 flex_install/options
 flex_install/results_1
+flex_install/results_2
 flex_install/run_1
 .cdsapirc
 .ecmwfapirc

@@ -203,7 +203,7 @@ sudo make -s -j 2 install
 cd $HOME
 sudo rm hdf5-1.8.13.tar.gz
 sudo rm -r hdf5-1.8.13
-
+#
 # Install NetCDF4.
 cd $HOME
 wget -q https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-c-4.8.0.tar.gz
@@ -225,17 +225,6 @@ sudo make -s -j 2 install
 cd $HOME
 sudo rm netcdf-c-4.8.0.tar.gz
 sudo rm -r netcdf-c-4.8.0
-
-# Install Open MPI
-cd $HOME
-wget -q https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.gz
-tar -xzf openmpi-4.1.1.tar.gz
-cd openmpi-4.1.1
-./configure --prefix=/usr/local
-sudo make -s -j 2 all install
-cd $HOME
-sudo rm openmpi-4.1.1.tar.gz
-sudo rm -r openmpi-4.1.1
 
 # Install flex_extract.
 cd /usr/local
@@ -265,8 +254,6 @@ sudo echo "" >> /root/.bashrc
 source /root/.bashrc
 
 # Install FLEXPART.
-# Normal version: src2.
-# MPI version: src3.
 cd /usr/local
 sudo wget -q https://www.flexpart.eu/downloads/66
 sudo tar -xf 66
@@ -285,14 +272,8 @@ sudo cp -r $FLEX_DIR/src $FLEX_DIR/src2
 cd $FLEX_DIR/src2
 sudo rm makefile
 sudo cp $HOME/flex_install/makefile makefile
-cd ..
-sudo cp -r src2 src3
-sudo cp /usr/local/lib/libnetcdf.so.19 /usr/lib/x86_64-linux-gnu
-sudo cp /usr/local/lib/libopen-pal.so.40 /usr/lib
-cd ../src2
+sudo cp /usr/local/lib/libnetcdf.so.19 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19
 sudo make -s -j 2 ncf=yes
-cd ../src3
-sudo make -s -j 2 mpi ncf=yes
 
 # Perform tests.
 cd $HOME/flex_install
@@ -309,21 +290,23 @@ sudo rm download_erainterim_ecmwfapi.grib
 cd /usr/local/flex_extract/Testing/Installation/Calc_etadot
 # Test calc_etadot, from flex_part.
 sudo ../../../Source/Fortran/calc_etadot
-# Test FLEXPART without arguments.
 cd $FLEX_DIR
+# Test FLEXPART without arguments.
 sudo ./src2/FLEXPART
-sudo ./src3/FLEXPART
 # Test flex_extract with a simple request.
 sudo $CONDA_FP $FLEX_SUBMIT --controlfile=CONTROL_EI.public --start_date=20120101 --public=1 --inputdir=$FLEX_INPUT --outputdir=$FLEX_OUTPUT
 sudo rm $FLEX_OUTPUT/*
 # Test FLEXPART with a simple run.
 cd $HOME/flex_install
 sudo mkdir output_1
-sudo mkdir output_2
 # Run this command to download the files directly.
 #sudo $CONDA_FP $FLEX_SUBMIT --controlfile=$HOME/flex_install/CONTROL_EI.public --start_date=20120101 --public=1 --inputdir=$FLEX_INPUT --outputdir=$FLEX_OUTPUT
-sudo $FLEX_DIR/src2/FLEXPART pathnames
-sudo $FLEX_DIR/src3/FLEXPART pathnames_2
+sudo echo "$HOME/flex_install/options/" > pathnames
+sudo echo "$HOME/flex_install/output_1/" >> pathnames
+sudo echo "$HOME/flex_install/run_1/" >> pathnames
+sudo echo "$HOME/flex_install/AVAILABLE" >> pathnames
+sudo echo "" >> pathnames
+sudo $FLEX_DIR/src2/FLEXPART
 
 # Anaconda installation may remove the path to execute explorer.exe in WSL virtual machines.
 # It may be necessary to run source ~/.bashrc after script completion.
