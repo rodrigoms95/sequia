@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 from ecmwfapi import ECMWFDataServer
+import eccodes
+import genshi
+import numpy
+import cdsapi
 
 # To run this example, you need an API key
 # available from https://api.ecmwf.int/v1/key/
-
+'''
 server = ECMWFDataServer()
 server.retrieve({
     'origin'    : "ecmf",
@@ -21,3 +25,19 @@ server.retrieve({
     'class'     : "ti",
     'target'    : "tigge_2014-11-01_0012.grib"
 })
+'''
+
+c = cdsapi.Client()
+
+c.retrieve("reanalysis-era5-pressure-levels",
+{
+"variable": "temperature",
+"pressure_level": "1000",
+"product_type": "reanalysis",
+"year": "2008",
+"month": "01",
+"day": "01",
+"time": "12:00",
+"format": "grib"
+},
+"download_cdsapi.grib")
