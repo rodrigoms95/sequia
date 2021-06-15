@@ -1,8 +1,10 @@
-#Agregar archivos a ignorar.
+#Agregar archivos y carpetas a ignorar.
 data/
 flex_install/options
 flex_install/results_1
 flex_install/run_1
+.cdsapirc
+.ecmwfapirc
 *.code-workspace
 *.csv
 *.json
