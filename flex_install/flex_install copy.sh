@@ -13,7 +13,7 @@
 #     conda:     Miniconda is already installed.
 # -w: Signals the use of a WSL virtual machine,
 #     doesn't take parameters.
-#
+
 # Stop at first error.
 set -e
 
@@ -149,13 +149,15 @@ case $conda in
         wget -q https://repo.anaconda.com/miniconda/$CONDA_WEB
         sudo bash $HOME/$CONDA_WEB -b -p $CONDA_SOURCE
         sudo rm $CONDA_WEB
-        sudo echo "# Path to conda binaries." >> $HOME/.bashrc
+                sudo echo "# Path to conda binaries." >> $HOME/.bashrc
         sudo echo export PATH="$CONDA_SOURCE/bin:$PATH" >> $HOME/.bashrc
         sudo echo export PATH="$HOME/.local/bin:$PATH" >> $HOME/.bashrc
+        source $CONDA_SOURCE/etc/profile.d/conda.sh
         sudo echo "" >> $HOME/.bashrc
         sudo echo "# Path to conda binaries." >> /root/.bashrc
         sudo echo export PATH="$CONDA_SOURCE/bin:$PATH" >> /root/.bashrc
         sudo echo export PATH="$HOME/.local/bin:$PATH" >> /root/.bashrc
+        source $CONDA_SOURCE/etc/profile.d/conda.sh
         sudo echo "" >> /root/.bashrc
         source /root/.bashrc
         source $CONDA_SOURCE/etc/profile.d/conda.sh
@@ -203,7 +205,7 @@ sudo make -s -j 2 install
 cd $HOME
 sudo rm hdf5-1.8.13.tar.gz
 sudo rm -r hdf5-1.8.13
-#
+
 # Install NetCDF4.
 cd $HOME
 wget -q https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-c-4.8.0.tar.gz
@@ -223,6 +225,7 @@ make -s -j 2
 make check
 sudo make -s -j 2 install
 cd $HOME
+sudo cp /usr/local/lib/libnetcdf.so.19 /usr/lib/x86_64-linux-gnu
 sudo rm netcdf-c-4.8.0.tar.gz
 sudo rm -r netcdf-c-4.8.0
 
@@ -254,6 +257,7 @@ sudo echo "" >> /root/.bashrc
 source /root/.bashrc
 
 # Install FLEXPART.
+# Normal version: src2.
 cd /usr/local
 sudo wget -q https://www.flexpart.eu/downloads/66
 sudo tar -xf 66
@@ -272,7 +276,6 @@ sudo cp -r $FLEX_DIR/src $FLEX_DIR/src2
 cd $FLEX_DIR/src2
 sudo rm makefile
 sudo cp $HOME/flex_install/makefile makefile
-sudo cp /usr/local/lib/libnetcdf.so.19 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19
 sudo make -s -j 2 ncf=yes
 
 # Perform tests.
@@ -290,8 +293,8 @@ sudo rm download_erainterim_ecmwfapi.grib
 cd /usr/local/flex_extract/Testing/Installation/Calc_etadot
 # Test calc_etadot, from flex_part.
 sudo ../../../Source/Fortran/calc_etadot
-cd $FLEX_DIR
 # Test FLEXPART without arguments.
+cd $FLEX_DIR
 sudo ./src2/FLEXPART
 # Test flex_extract with a simple request.
 sudo $CONDA_FP $FLEX_SUBMIT --controlfile=CONTROL_EI.public --start_date=20120101 --public=1 --inputdir=$FLEX_INPUT --outputdir=$FLEX_OUTPUT
@@ -301,12 +304,7 @@ cd $HOME/flex_install
 sudo mkdir output_1
 # Run this command to download the files directly.
 #sudo $CONDA_FP $FLEX_SUBMIT --controlfile=$HOME/flex_install/CONTROL_EI.public --start_date=20120101 --public=1 --inputdir=$FLEX_INPUT --outputdir=$FLEX_OUTPUT
-sudo echo "$HOME/flex_install/options/" > pathnames
-sudo echo "$HOME/flex_install/output_1/" >> pathnames
-sudo echo "$HOME/flex_install/run_1/" >> pathnames
-sudo echo "$HOME/flex_install/AVAILABLE" >> pathnames
-sudo echo "" >> pathnames
-sudo $FLEX_DIR/src2/FLEXPART
+sudo $FLEX_DIR/src2/FLEXPART pathnames
 
 # Anaconda installation may remove the path to execute explorer.exe in WSL virtual machines.
 # It may be necessary to run source ~/.bashrc after script completion.

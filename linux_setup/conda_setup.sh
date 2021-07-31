@@ -30,26 +30,35 @@ done
 # Establish home directory.
 HOME="/home/$user"
 case $conda in
+    # For use with anaconda.
     anaconda|anaconda3)
-        CONDA_DIR="$HOME/anaconda3";;
+        # Directory for environments.
+        CONDA_DIR="$HOME/anaconda3"
+        # Directory for source in shell scripts.
+        CONDA_SOURCE="$HOME/anaconda3";;
+    # For use with miniconda.
     miniconda|conda|*)
-        CONDA_DIR="$HOME/miniconda";;
+        CONDA_DIR="$HOME/.conda"
+        CONDA_SOURCE="$HOME/miniconda";;
 esac
-source $CONDA_DIR/etc/profile.d/conda.sh
+
+# Activate conda in this script.
+source $CONDA_SOURCE/etc/profile.d/conda.sh
 
 # Install git.
 sudo apt-get update
 sudo apt-get install git
-yes | conda create -n gv
 
 # Create environment named gv for geoviews.
+yes | conda create -n gv
 conda activate gv
 conda config --env --add channels pyviz
 conda config --env --set channel_priority strict
-yes | conda install python=3.7 geoviews descartes
-yes | conda create -n ci python=3.8
+#yes | conda install python=3.7 geoviews descartes
+yes | conda install python=3.7 geoviews
 
 # Create environment named ci for climate-indices.
+yes | conda create -n ci python=3.8
 conda activate ci
 conda config --env --add channels conda-forge
 conda config --env --set channel_priority strict

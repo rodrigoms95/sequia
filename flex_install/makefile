@@ -55,7 +55,7 @@ ifeq ($(gcc), 4.9)
 	ROOT_DIR = /usr/local
 
 	F90      = /usr/bin/gfortran
-	MPIF90   = /usr/bin/mpifort
+	MPIF90   = /usr/local/bin/mpifort
          
 	INCPATH1 = /usr/include
 	INCPATH2 = /usr/local/include
@@ -66,7 +66,7 @@ else
 	ROOT_DIR = /usr/local
 
 	F90      = /usr/bin/gfortran
-	MPIF90   = /usr/bin/mpifort
+	MPIF90   = /usr/local/bin/mpifort
          
 	INCPATH1 = /usr/include
 	INCPATH2 = /usr/local/include

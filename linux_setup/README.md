@@ -4,12 +4,12 @@ La configuración es específica para el usuario llamado `username`.
 
 ## Crear ambientes en conda para geoviews y climate-indices
 ```shell
-sudo -H bash ~/flex_install/conda_setup.sh -n username -c miniconda
+sudo -H time bash ~/linux_setup/conda_setup.sh -n username -c miniconda
 ```
 
 ## Instalar Jekyll
 ```shell
-sudo -H bash ~/flex_install/jekyll_install.sh
+sudo -H time bash ~/linux_setup/jekyll_install.sh
 ```
 
 ## Recuperar explorer.exe en WSL

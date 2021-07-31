@@ -13,7 +13,7 @@
 #     conda:     Miniconda is already installed.
 # -w: Signals the use of a WSL virtual machine,
 #     doesn't take parameters.
-#
+
 # Stop at first error.
 set -e
 
@@ -149,13 +149,15 @@ case $conda in
         wget -q https://repo.anaconda.com/miniconda/$CONDA_WEB
         sudo bash $HOME/$CONDA_WEB -b -p $CONDA_SOURCE
         sudo rm $CONDA_WEB
-        sudo echo "# Path to conda binaries." >> $HOME/.bashrc
+                sudo echo "# Path to conda binaries." >> $HOME/.bashrc
         sudo echo export PATH="$CONDA_SOURCE/bin:$PATH" >> $HOME/.bashrc
         sudo echo export PATH="$HOME/.local/bin:$PATH" >> $HOME/.bashrc
+        source $CONDA_SOURCE/etc/profile.d/conda.sh
         sudo echo "" >> $HOME/.bashrc
         sudo echo "# Path to conda binaries." >> /root/.bashrc
         sudo echo export PATH="$CONDA_SOURCE/bin:$PATH" >> /root/.bashrc
         sudo echo export PATH="$HOME/.local/bin:$PATH" >> /root/.bashrc
+        source $CONDA_SOURCE/etc/profile.d/conda.sh
         sudo echo "" >> /root/.bashrc
         source /root/.bashrc
         source $CONDA_SOURCE/etc/profile.d/conda.sh
@@ -304,6 +306,42 @@ sudo mkdir output_1
 #sudo $CONDA_FP $FLEX_SUBMIT --controlfile=$HOME/flex_install/CONTROL_EI.public --start_date=20120101 --public=1 --inputdir=$FLEX_INPUT --outputdir=$FLEX_OUTPUT
 sudo $FLEX_DIR/src2/FLEXPART pathnames
 
+# Install Open MPI.
+cd $HOME
+source /root/.bashrc
+wget -q https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.gz
+tar -xzf openmpi-4.1.1.tar.gz
+cd openmpi-4.1.1
+./configure --prefix=/usr/local
+make -s -j 2
+make check
+sudo make -s -j 2 install
+cd $HOME
+sudo cp -r /usr/local/lib/* /usr/lib
+sudo rm openmpi-4.1.1.tar.gz
+sudo rm -r openmpi-4.1.1
+
+# Install FLEXPART MPI.
+# Normal version: src2.
+# MPI version: src3.
+cd $FLEX_DIR
+sudo cp -r src src3
+cd src3
+sudo rm makefile
+sudo cp $HOME/flex_install/makefile makefile
+sudo make -s -j 2 mpi ncf=yes
+
+# Perform tests on FLEXPART MPI.
+# Test FLEXPART without arguments.
+cd $FLEX_DIR
+sudo ./src3/FLEXPART_MPI
+# Test FLEXPART with a simple run.
+cd $HOME/flex_install
+sudo mkdir output_2
+# Run this command to download the files directly.
+#sudo $CONDA_FP $FLEX_SUBMIT --controlfile=$HOME/flex_install/CONTROL_EI.public --start_date=20120101 --public=1 --inputdir=$FLEX_INPUT --outputdir=$FLEX_OUTPUT
+sudo $FLEX_DIR/src3/FLEXPART_MPI pathnames_2
+
 # Anaconda installation may remove the path to execute explorer.exe in WSL virtual machines.
 # It may be necessary to run source ~/.bashrc after script completion.
 source /root/.bashrc
@@ -316,6 +354,7 @@ if [ $win == true ]
         sudo echo export PATH="/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:$PATH" >> /root/.bashrc
         sudo echo "" >> /root/.bashrc
 fi
+
 cd $HOME
 echo
 echo FLEXPART IS INSTALLED!

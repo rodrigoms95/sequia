@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 import geoviews as gv
+import holoviews as hv
 import datetime as dt
 import geopandas as gpd
 
@@ -23,8 +24,8 @@ if not os.path.exists(path): os.mkdir(path)
 if not os.path.exists(out_path): os.mkdir(out_path)
 if not os.path.exists(data_path): os.mkdir(data_path)
 
-spi_ds = xr.open_dataset(out_path + "mexico_spi_pearson_06.nc").load()
-spei_ds = xr.open_dataset(out_path + "mexico_spei_pearson_06.nc").load()
+spi_ds = xr.open_dataset(data_path + "mexico_spi_pearson_06.nc").load()
+spei_ds = xr.open_dataset(data_path + "mexico_spei_pearson_06.nc").load()
 
 spi_ds2 = spi_ds[dict(lat = slice(10, 12), lon = slice(39, 41))]
 spi_ds2 = spi_ds2.mean(dim = "lat").mean(dim = "lon")
@@ -42,7 +43,7 @@ df = df[df.index > "1970"]
 
 gr = df.copy()
 gr.index = gr.index.to_period("Y")
-plot = gr.head().plot.line()
+plot = gr.plot.line()
 plot.figure.savefig(out_path + "years.png")
 with open(out_path + "correlation", "w") as f:
     f.write(f"Correlación: {df.corr().iat[1, 0]}")
@@ -58,7 +59,7 @@ else: df_min = df_min_spei
 df_min.reset_index(inplace = True)
 
 df_min.head().to_csv(out_path + "years.csv")
-'''
+
 kdims = ["time", "lon", "lat"]
 spi_vdims = ["spi_pearson_06"]
 spei_vdims = ["spei_pearson_06"]
@@ -88,17 +89,20 @@ fname = "conto4mgw.shp"
 gdf = gpd.read_file(fdir + fname)
 mexico = gv.Path(gdf).opts(color = "black", linewidth=1.25)
 
-
 img_spi = (spi.to(gv.Image, ["lon", "lat"]).opts(**opts)
     * gf.coastline * cuenca * mexico)
-img_spei = (spei.to(gv.Image, ["lon", "lat"]).opts(**opts)
-    * gf.coastline * cuenca * mexico)
+hv.save(img_spi, out_path + "spi.html")
+'''
+spi = spi.to(gv.Image, ["lon", "lat"]).opts(**opts)
 
-for i in range(0,5):
-    gv.save(img_spi[i], out_path + "spi" + str(i) + ".png")
-    gv.save(img_spei[i], out_path + "spei" + str(i) + ".png")
-
-
+for date in df_min["time"]:
+    img_spi = spi.select(time = date) * gf.coastline * cuenca * mexico
+    #img_spei = spei.select(time = date).to(gv.Image, ["lon", "lat"]).opts(
+    #    **opts) * gf.coastline * cuenca * mexico)
+    hv.save(img_spi, out_path + "spi" + str(date) + ".png")
+    #gv.save(img_spei, out_path + "spei" + str(date) + ".png")
+'''
+'''
 tm = np.array([tuple(df_min.loc[0:4, "time"])]).T
 tm = np.repeat(tm, 5, axis = 1)
 

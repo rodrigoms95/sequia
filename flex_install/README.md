@@ -4,7 +4,7 @@ La configuración es específica para el usuario llamado `username`. Copiar `fle
 
 ## Comando para instalar FLEXPART en una distribución nueva de Ubuntu/Debian
 ```shell
-sudo -H bash ~/flex_install/flex_install.sh -n username -c miniconda -w
+sudo -H time bash ~/flex_install/flex_install.sh -n username -c miniconda -w
 ```
 
 ## Comando tipo para correr flex_extract
