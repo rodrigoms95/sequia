@@ -18,21 +18,22 @@
 set -e
 
 # Default options for conda and user.
-user="rodrigo"
+USER="rodrigo"
 conda="miniconda"
 
 # Read arguments.
 while getopts n:c:w flag
 do
     case "${flag}" in
-        n) user=${OPTARG};;
+        n) USER=${OPTARG};;
         c) conda=${OPTARG};;
         w) win=true;;
     esac
 done
 
 # Establish home directory.
-HOME="/home/$user"
+HOME="/home/$USER"
+
 case $conda in
     # For use with anaconda.
     anaconda|anaconda3)
@@ -48,6 +49,11 @@ case $conda in
         CONDA_SOURCE="$HOME/miniconda"
         CONDA_WEB="Miniconda3-py39_4.9.2-Linux-x86_64.sh";;
 esac
+
+# Give user full control of HOME.
+sudo chgrp -R $USER $HOME
+sudo chmod 770 -R $HOME
+sudo adduser $USER $USER
 
 # Write variables to .bashrc.
 sudo echo "" >> $HOME/.bashrc
@@ -163,7 +169,14 @@ case $conda in
         source $CONDA_SOURCE/etc/profile.d/conda.sh
         conda init
         source $CONDA_SOURCE/etc/profile.d/conda.sh
-        conda config --append envs_dirs $CONDA_DIR/envs;;
+        conda config --append envs_dirs $CONDA_DIR/envs
+        # Allow user to make use of conda.
+        sudo groupadd conda
+        sudo chgrp -R conda $CONDA_DIR
+        sudo chmod 770 -R $CONDA_DIR
+        sudo chgrp -R conda $CONDA_SOURCE
+        sudo chmod 770 -R $CONDA_SOURCE
+        sudo adduser $USER conda;;
 esac
 
 # Create conda environment named fp for use with FLEXPART.

@@ -52,18 +52,21 @@ sudo apt-get install git
 # Create environment named gv for geoviews.
 yes | conda create -n gv
 conda activate gv
-conda config --env --add channels pyviz
+conda config --env --add channels conda-forge
+conda config --env --remove channels defaults
 conda config --env --set channel_priority strict
-#yes | conda install python=3.7 geoviews descartes
-yes | conda install python=3.7 geoviews
+yes | conda install python=3.7 geoviews ipykernel
 
 # Create environment named ci for climate-indices.
 yes | conda create -n ci python=3.8
 conda activate ci
 conda config --env --add channels conda-forge
+conda config --env --remove channels defaults
 conda config --env --set channel_priority strict
 yes | pip install climate-indices
 yes | conda install nco
+
 conda activate base
+
 echo
 echo Geoviews and climate-indices are configured!
