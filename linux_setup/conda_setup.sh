@@ -58,7 +58,17 @@ conda config --env --set channel_priority strict
 yes | conda install python=3.7 geoviews ipykernel
 
 # Create environment named ci for climate-indices.
-yes | conda create -n ci python=3.8
+yes | conda create -n ci
+conda activate ci
+conda config --env --add channels conda-forge
+conda config --env --remove channels defaults
+conda config --env --set channel_priority strict
+yes | conda install python=3.8
+yes | pip install climate-indices
+yes | conda install nco
+
+# Create environment named gdal for GDAL and OGR.
+yes | conda create -n gdal python=3.8
 conda activate ci
 conda config --env --add channels conda-forge
 conda config --env --remove channels defaults
