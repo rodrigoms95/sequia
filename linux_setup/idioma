@@ -1,0 +1,2 @@
+sudo vim /etc/locale.gen
+sudo locale-gen

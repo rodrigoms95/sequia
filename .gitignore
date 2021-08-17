@@ -1,5 +1,6 @@
 #Agregar archivos y carpetas a ignorar.
 data/
+results/
 flex_install/options
 flex_install/results_1
 flex_install/results_2
