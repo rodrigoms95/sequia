@@ -1,0 +1,12 @@
+Instalación de FLEXPART en WSL2:
+
+	https://www.jianshu.com/p/6bc7cee6c9bf
+
+Correr los comandos con sudo si fallan
+
+Para MPI y emoslib no funciona la instalación, pero no son necesarios
+
+Paquetes de visualización (reflexible y quicklook):
+
+	sudo pip install git+https://github.com/spectraphilic/reflexible.git
+	sudo git clone https://radekhofman@bitbucket.org/radekhofman/quicklook.git
