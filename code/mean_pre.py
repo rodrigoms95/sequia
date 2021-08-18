@@ -2,7 +2,6 @@ import os
 
 
 import pandas as pd
-import numpy as np
 import xarray as xr
 
 import matplotlib.pyplot as plt
@@ -30,8 +29,6 @@ with xr.load_dataset(path_cru + fname_cru) as pre_xr:
 
 # Se seleccionan los datos a partir de 1979.
 pre_df = pre_df[pre_df.index > "1979"]
-# Se suman los valores para cada mes.
-pre_df = pre_df.resample("M").sum()
 # Se obtienen los nombres de los meses.
 pre_df["Mes"] = pre_df.index.month_name("es_MX")
 # Se cambia el formato del índice para que no incluya el día.
