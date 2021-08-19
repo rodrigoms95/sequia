@@ -24,8 +24,7 @@ with xr.load_dataset(path_cru + fname_cru) as pre_xr:
     # Se recorta la zona de estudio.
     pre_xr = pre_xr[dict(lon = slice(lon_i, lon_f), lat = slice(lat_i, lat_f))]
     # Se promedia espacialmente y se retira stn, que no se requiere.
-    pre_df = pre_xr.mean(dim = "lat").mean(
-        dim = "lon").to_dataframe().drop("stn", axis = 1)
+    c
 
 # Se seleccionan los datos a partir de 1979.
 pre_df = pre_df[pre_df.index > "1979"]
