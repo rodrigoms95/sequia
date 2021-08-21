@@ -1,3 +1,6 @@
+# Evalúa qué puntos del grid del CRU corresponden a
+# la Cuenca del Valle de México.
+
 import os
 
 
@@ -80,7 +83,7 @@ gdf_poly = gpd.GeoDataFrame(
 # Se proyecta la geometría a UTM y calcular área.
 gdf_poly["Area"] = gdf_poly.to_crs("epsg:32633").area
 
-gdf_poly["Intersect"] = np.nan
+gdf_poly["Intersect"] = 0
 
 for i in gdf_poly.index:
     # Se calcula área de intersección entre áreas de influencia y cuenca.
@@ -91,9 +94,7 @@ for i in gdf_poly.index:
 
     # Se asegura que haya ceros en el GeoDataFrame en caso de no haber
     # intersección.
-    if len(overlay.index) == 0: 
-        gdf_poly.loc[i, "Intersect"] = 0
-    else: 
+    if len(overlay.index) > 0: 
         gdf_poly.loc[i, "Intersect"] = overlay[0]
 
 # Se calcula el porcentaje de intersección entre áreas de influencia

@@ -1,3 +1,6 @@
+# Calcula la precipitacion mensual media para el periodo
+# 1979 - 2020 en la Cuenca del Valle de México.
+
 import os
 
 
@@ -24,7 +27,8 @@ with xr.load_dataset(path_cru + fname_cru) as pre_xr:
     # Se recorta la zona de estudio.
     pre_xr = pre_xr[dict(lon = slice(lon_i, lon_f), lat = slice(lat_i, lat_f))]
     # Se promedia espacialmente y se retira stn, que no se requiere.
-    c
+    pre_df = pre_xr.drop("stn").mean(dim = "lat").mean(
+        dim = "lon").to_dataframe()
 
 # Se seleccionan los datos a partir de 1979.
 pre_df = pre_df[pre_df.index > "1979"]
@@ -45,7 +49,7 @@ plt.title(
     "Precipitación media en la\nCuenca del Valle de México",
     {'fontsize': 18}
     )
-plt.xticks(range(0,12), pre_df.Mes[0:12], rotation = 60)
+plt.xticks(range(0,12), pre_df.Mes[0:12], rotation = 30, ha = "right")
 
 # Se guarda la gráfica.
 plt.savefig("./results/mean_pre.png", facecolor = "white", bbox_inches="tight")
