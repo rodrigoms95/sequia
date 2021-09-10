@@ -1,15 +1,15 @@
 # Coordenadas límite de México.
-mlon1="-118.75"
-mlon2="-86.25"
-mlat1="14.25"
-mlat2="32.75"
+mlon1="-118.390"
+mlon2="-86.660"
+mlat1="14.566"
+mlat2="32.737"
 
 # Coordenadas límite de la Cuenca
 # del Valle de México.
-clon1="-118.75"
-clon2="-86.25"
-clat1="14.25"
-clat2="32.75"
+clon1="-99.749"
+clon2="-98.194"
+clat1="19.049"
+clat2="20.776"
 
 # Rutas de datos y resultados
 path_d="data/CHIRPS_global_days_p05"
