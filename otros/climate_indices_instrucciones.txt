@@ -32,3 +32,19 @@ process_climate_indices --index spi --periodicity monthly --netcdf_precip Climat
 
 --- Calcula el SPEI ---
 process_climate_indices --index spei --periodicity monthly --netcdf_precip Climate_indices/mexico_cru.1901.2020.pre.mm.nc --var_name_precip pre --netcdf_pet Climate_indices/mexico_cru.1901.2020.pet.mm.nc --var_name_pet pet --output_file_base Climate_indices/mexico --scales 1 6 --calibration_start_year 1901 --calibration_end_year 2020
+
+
+Límites México
+Lat:   14.25,  32.75
+Lon: -118.75, -86.25
+
+lon1="-118.75"
+lon2="-86.25"
+lat1="14.25"
+lat2="32.75"
+infile="data/CHIRPS_global_days_p05/chirps-v2.0.1982.days_p05.nc"
+outfile="data/CHIRPS_global_days_p05/mexico_chirps-v2.0.1982.days_p05.nc"
+cdo sellonlatbox,$lon1,$lon2,$lat1,$lat2 $infile $outfile
+
+ncks -d latitude,$lat1,$lat2 -d longitude,$lon1,$lon2 $infile -O $outfile
+
