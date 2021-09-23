@@ -11,9 +11,13 @@ import matplotlib.pyplot as plt
 
 
 path_cru = os.getcwd() +  "/data/CRU/"
-path_r = os.getcwd() +  "/results/"
+path_r = os.getcwd() +  "/results/sequia/"
 fname_cru = "mexico_cru_ts4.05.1901.2020.pre.dat.nc"
 fname_grid = "grid_points.csv"
+
+# Si no existe la carpeta, la crea.
+if not os.path.exists(path_r):
+    os.mkdir(path_r)
 
 # Se leen los límites de la cuenca.
 df_grid = pd.read_csv(path_r + fname_grid)

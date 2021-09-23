@@ -15,8 +15,12 @@ gv.output(size = 150)
 
 
 fdir_d = os.getcwd() +  "/data/Cuencas/Regiones_Hidrologicas_Administrativas/"
-fdir_r = os.getcwd() +  "/results/"
+fdir_r = os.getcwd() +  "/results/sequia/"
 fname = "rha250kgw.shp"
+
+# Si no existe la carpeta, la crea.
+if not os.path.exists(fdir_r):
+    os.mkdir(fdir_r)
 
 # Se cargan las regiones hidrológico administrativas.
 gdf = gpd.read_file(fdir_d + fname)
