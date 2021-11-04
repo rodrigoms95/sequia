@@ -41,6 +41,7 @@ for filename in $path_d/*.nc; do
     cdo sellonlatbox,$mlon1,$mlon2,$mlat1,$mlat2 $filename $moutfile
     mv $moutfile $mpath_r
     moutfile="$mpath_r/${moutfile##*/}"
+    # Recorta al tamaño de la cuenca del Valle de México.
     coutfile="$path_d/cuenca_valle_mexico_${filename##*/}"
     cdo sellonlatbox,$clon1,$clon2,$clat1,$clat2 $moutfile $coutfile
     mv $coutfile $cpath_r
