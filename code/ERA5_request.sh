@@ -8,8 +8,6 @@ DATA="levels"
 VAR="u"
 LEVEL="500"
 
-echo $LEVEL
-
 # Read arguments.
 while getopts d:v:l: flag
 do
@@ -19,8 +17,6 @@ do
         l) LEVEL=${OPTARG};;
     esac
 done
-
-echo $LEVEL
 
 # Cambiar al folder local!!!
 CONDA_SOURCE="/opt/homebrew/Caskroom/miniforge/base"
