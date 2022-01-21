@@ -27,6 +27,11 @@ svars = [ "u", "v" ]
 #   sys.argv[3]: año inicial.
 #   sys.argv[4]: año final (inclusive).
 svar = sys.argv[1]
+
+# Revisamos que las variables tengan el formato correcto.
+if not ( svar in svars ):
+    raise ValueError( "Variable inválida." )
+
 # vars y svars tienen el mismo índice.
 var  = vars[ svars.index(svar) ]
 # Nivel de presión.
@@ -35,8 +40,6 @@ level = sys.argv[2]
 year = [ int( sys.argv[3] ), int( sys.argv[4] ) ]
 
 # Revisamos que las variables tengan el formato correcto.
-if not ( svar in svars ):
-    raise ValueError( "Variable inválida." )
 if not ( year[0] in range(1981, 2023) ):
     raise ValueError( "Año inicial inválido." )
 if not ( level in levels ):

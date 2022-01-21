@@ -42,35 +42,46 @@ then
     echo ""
     echo ""
 
+    DIR='../data/ERA5/'
+    DIR_TEMP=$DIR$VAR'/'
+
     # Download all years in four batches.
     for i in 0 1 2 3
     do
     j=$((i + 1))
+
     echo "Downloading" $VAR $LEVEL ${YEARS[i]} ${YEARS[j]} "..."
     echo ""
     python ERA5_levels_request.py $VAR $LEVEL ${YEARS[i]} ${YEARS[j]}
     echo ""
+
+    # Convert from hourly to daily and delete leap days.
+    IN=$DIR_TEMP'mexico_'$VAR'_'$LEVEL'_'${YEARS[i]}'_'$((YEARS[j] - 1))'.grib'
+    MID=$DIR_TEMP'mexico_'$VAR'_'$LEVEL'_'${YEARS[i]}'_'$((YEARS[j] - 1))'_daily_leap.grib'
+    OUT=$DIR_TEMP'mexico_'$VAR'_'$LEVEL'_'${YEARS[i]}'_'$((YEARS[j] - 1))'_daily.grib'
+    cdo   daymean $IN  $MID
+    cdo  del29feb $MID $OUT
+    rm $IN
+    rm $MID
+
     echo ""
+    echo ""
+
     done
 
     echo "Processing files..."
     echo ""
 
-    DIR='../data/ERA5/'
-    DIR_TEMP=$DIR$VAR'/'
     FILES=$DIR_TEMP'*.grib'
-    IN=$DIR_TEMP'/mexico_'$VAR'_'$LEVEL'_hourly.grib'
-    MID=$DIR_TEMP'mexico_'$VAR'_'$LEVEL'_hourly_leap.grib'
-    OUT_1=$DIR'mexico_'$VAR'_'$LEVEL'_daily.grib'
-    OUT_2=$DIR'mexico_'$VAR'_'$LEVEL'_daily_mean.grib'
+    IN=$DIR'mexico_'$VAR'_'$LEVEL'_daily.grib'
+    OUT=$DIR'mexico_'$VAR'_'$LEVEL'_daily_mean.grib'
 
-    # Merge all years and convert from hourly to daily.
+    # Merge all years and calculate multi-year daily means.
     cdo mergetime $FILES $IN
-    cdo  del29feb $IN    $MID
-    cdo   daymean $MID   $OUT_1
-    cdo  ydaymean $MID   $OUT_2
+    cdo  ydaymean $IN   $OUT
     rm -r $DIR_TEMP
 
+    echo ""
     echo "All files downloaded and processed succesfully."
     echo ""
 
@@ -81,33 +92,44 @@ then
     echo ""
     echo ""
 
+    DIR='../data/ERA5/'
+    DIR_TEMP=$DIR$VAR'/'
+
     # Download all years in four batches.
     for i in 0 1 2 3
     do
     j=$((i + 1))
+    
     echo "Downloading" $VAR ${YEARS[i]} ${YEARS[j]}  "..."
     echo ""
     python ERA5_single_request.py $VAR ${YEARS[i]} ${YEARS[j]}
     echo ""
+
+    # Convert from hourly to daily and delete leap days.
+    IN=$DIR_TEMP'mexico_'$VAR'_'${YEARS[i]}'_'$((YEARS[j] - 1))'.grib'
+    MID=$DIR_TEMP'mexico_'$VAR'_'${YEARS[i]}'_'$((YEARS[j] - 1))'_daily_leap.grib'
+    OUT=$DIR_TEMP'mexico_'$VAR'_'${YEARS[i]}'_'$((YEARS[j] - 1))'_daily.grib'
+    cdo   daymean $IN  $MID
+    cdo  del29feb $MID $OUT
+    rm $IN
+    rm $MID
+
     echo ""
+    echo ""
+
+
     done
 
     echo "Processing files..."
     echo ""
 
-    DIR='../data/ERA5/'
-    DIR_TEMP=$DIR$VAR'/'
     FILES=$DIR_TEMP'*.grib'
-    IN=$DIR_TEMP'/mexico_'$VAR'_hourly.grib'
-    MID=$DIR_TEMP'mexico_'$VAR'_hourly_leap.grib'
-    OUT_1=$DIR'mexico_'$VAR'_daily.grib'
-    OUT_2=$DIR'mexico_'$VAR'_daily_mean.grib'
+    IN=$DIR'mexico_'$VAR'_daily.grib'
+    OUT=$DIR'mexico_'$VAR'_daily_mean.grib'
 
-    # Merge all years and convert from hourly to daily.
+    # Merge all years and calculate multi-year daily means.
     cdo mergetime $FILES $IN
-    cdo  del29feb $IN    $MID
-    cdo   daymean $MID   $OUT_1
-    cdo  ydaymean $MID   $OUT_2
+    cdo  ydaymean $IN   $OUT
     rm -r $DIR_TEMP
 
     echo ""

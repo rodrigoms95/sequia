@@ -21,14 +21,17 @@ svars = [ "olr", "sst" ]
 #   sys.argv[2]: año inicial.
 #   sys.argv[3]: año final (exclusive).
 svar = sys.argv[1]
+
+# Revisamos que las variables tengan el formato correcto.
+if not ( svar in svars ):
+    raise ValueError( "Variable inválida." )
+
 # vars y svars tienen el mismo índice.
 var  = vars[ svars.index(svar) ]
 # Años a descargar.
 year = [ int( sys.argv[2] ), int( sys.argv[3] ) ]
 
 # Revisamos que las variables tengan el formato correcto.
-if not ( svar in svars ):
-    raise ValueError( "Variable inválida." )
 if not ( year[0] in range(1981, 2023) ):
     raise ValueError( "Año inicial inválido." )
 if not ( year[1] in range(1981, 2023) ):
