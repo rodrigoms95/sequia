@@ -70,11 +70,13 @@ then
 
     FILES=$DIR_TEMP'*.grib'
     IN=$DIR'mexico_'$VAR'_'$LEVEL'_daily.grib'
-    OUT=$DIR'mexico_'$VAR'_'$LEVEL'_daily_mean.grib'
+    OUT_1=$DIR'mexico_'$VAR'_'$LEVEL'_daily_mean.grib'
+    OUT_2=$DIR'mexico_'$VAR'_'$LEVEL'_daily_anom.grib'
 
     # Merge all years and calculate multi-year daily means.
     cdo mergetime $FILES $IN
-    cdo  ydaymean $IN   $OUT
+    cdo  ydaymean $IN    $OUT_1
+    cdo   ydaysub $OUT_1 $OUT_2
     rm -r $DIR_TEMP
 
     echo ""
@@ -122,10 +124,12 @@ then
     FILES=$DIR_TEMP'*.grib'
     IN=$DIR'mexico_'$VAR'_daily.grib'
     OUT=$DIR'mexico_'$VAR'_daily_mean.grib'
+    OUT=$DIR'mexico_'$VAR'_daily_anom.grib'
 
     # Merge all years and calculate multi-year daily means.
     cdo mergetime $FILES $IN
     cdo  ydaymean $IN   $OUT
+    cdo   ydaysub $OUT_1 $OUT_2
     rm -r $DIR_TEMP
 
     echo ""

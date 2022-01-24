@@ -41,11 +41,11 @@ if not ( year[1] in range(1981, 2023) ):
 years  = list( map( lambda x: f"{x}", range( year[0], year[1] ) ) )
 months = list( map( lambda x: f"{x:02d}", range(1, 13) ) )
 days   = list( map( lambda x: f"{x:02d}", range(1, 32) ) )
-hours  = list( map( lambda x: f"{x:02d}:00", range(0, 24) ) )
+hours  = list( map( lambda x: f"{x:02d}:00", range(0, 24, 12) ) )
 
 # Región en la que se descargan los datos.
 # Formato: ymax, xmin, ymin, xmax 
-region = [ 50, -135, -5, -65 ]
+region = [ 40, -120, 0, -50 ]
 nregion = "mexico"
 
 # Carpeta para descargar los archivos.
