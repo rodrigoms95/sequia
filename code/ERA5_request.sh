@@ -115,7 +115,6 @@ then
     echo ""
     echo ""
 
-
     done
 
     echo "Processing files..."
@@ -128,7 +127,7 @@ then
 
     # Merge all years and calculate multi-year daily means.
     cdo mergetime $FILES $IN
-    cdo  ydaymean $IN    $OUT
+    cdo  ydaymean $IN    $OUT_1
     cdo   ydaysub $IN    $OUT_1 $OUT_2
     rm -r $DIR_TEMP
 
