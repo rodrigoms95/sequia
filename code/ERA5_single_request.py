@@ -7,7 +7,7 @@ import cdsapi
 
 # Lista de variables por descargar.
 vars = [
-    "top_net_thermal_radiation", 
+    "mean_top_net_long_wave_radiation_flux", 
     "sea_surface_temperature" 
     ]
 # Nombre de la base de datos.
