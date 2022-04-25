@@ -8,12 +8,13 @@ import cdsapi
 # Lista de variables por descargar.
 vars = [
     "mean_top_net_long_wave_radiation_flux", 
-    "sea_surface_temperature" 
+    "sea_surface_temperature",
+    "surface_pressure"
     ]
 # Nombre de la base de datos.
 dataset = "reanalysis-era5-single-levels"
 # Nombre corto de las variables.
-svars = [ "olr", "sst" ]
+svars = [ "olr", "sst", "sp" ]
 
 # Escogemos la variable de acuerdo con
 # el argumento de la línea de comando.

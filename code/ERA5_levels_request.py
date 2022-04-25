@@ -14,11 +14,12 @@ levels = [ "1", "2", "3", "5", "7", "10", "20", "30", "50", "70",
 vars = [
     "u_component_of_wind", 
     "v_component_of_wind",
+    "geopotential"
     ]
 # Nombre de la base de datos.
 dataset = "reanalysis-era5-pressure-levels"
 # Nombre corto de las variables.
-svars = [ "u", "v" ]
+svars = [ "u", "v", "gp" ]
 
 # Escogemos la variable de acuerdo con
 # el argumento de la línea de comando.
