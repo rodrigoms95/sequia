@@ -18,7 +18,7 @@ vars = [
 # Nombre de la base de datos.
 dataset = "reanalysis-era5-single-levels"
 # Nombre corto de las variables.
-svars = [ "olr", "sst", "sp", "vidmf", "vivfu", "vivfv", "VIDMF" ]
+svars = [ "olr", "sst", "sp", "vidmf", "vivfu", "vivfv", "VIDMFI" ]
 
 # Escogemos la variable de acuerdo con
 # el argumento de la línea de comando.
