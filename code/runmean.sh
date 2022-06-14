@@ -10,8 +10,9 @@ source $CONDA_SOURCE'/etc/profile.d/conda.sh'
 conda activate gv
 
 D='20'
-VAR_L=( 'u' 'v' 'gp' )
-VAR_S=( 'sst' 'olr' 'sp' 'vidmf' 'vivfu' 'vivfv' 'VIDMFI' )
+VAR_L=( 'u' )
+#VAR_L=( 'u' 'v' 'gp' )
+#VAR_S=( 'sst' 'olr' 'sp' 'vidmf' 'vivfu' 'vivfv' 'VIDMFI' )
 LEVEL=( '925' '200' )
 ANOM=( '.' '_anom.' )
 
@@ -26,8 +27,11 @@ do
 
         IN='../data/ERA5/mexico_'$v'_'$l'_daily'$a'grib'
         OUT='../results/onset/onset_'$v'_'$l'_mean_'$D'_dias'$a'grib'
+        #OUT_2='../results/onset/onset_'$v'_'$l'_mean_'$D'_dias'$a'nc'
 
         cdo runmean,$D $IN $OUT
+        #cdo -f nc copy $OUT $OUT_2
+        #rm -r $OUT
 
         echo ""
 
@@ -44,8 +48,11 @@ do
 
     IN='../data/ERA5/mexico_'$v'_daily'$a'grib'
     OUT='../results/onset/onset_'$v'_mean_'$D'_dias'$a'grib'
+    OUT_2='../results/onset/onset_'$v'_mean_'$D'_dias'$a'nc'
 
     cdo runmean,$D $IN $OUT
+    cdo -f nc copy $OUT $OUT_2
+    rm -r $OUT
 
     echo ""
 
