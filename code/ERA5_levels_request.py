@@ -60,7 +60,7 @@ region = [ 40, -120, 0, -50 ]
 nregion = "mexico"
 
 # Carpeta para descargar los archivos.
-fdir = "../data/ERA5/" + svar + "/"
+fdir = "../data/ERA5/" + svar + "_" + level + "/"
 # Si no existe la carpeta, la crea.
 if not os.path.exists(fdir): os.mkdir(fdir)
 
