@@ -39,7 +39,7 @@ then
     echo ""
 
     DIR='../data/ERA5/'
-    DIR_TEMP=$DIR$VAR'/'
+    DIR_TEMP=$DIR$VAR'_'$LEVEL'/'
 
     # Download all years in four batches.
     for i in 0 1 2 3
@@ -71,12 +71,12 @@ then
     FILES=$DIR_TEMP'*.grib'
     IN=$DIR'mexico_'$VAR'_'$LEVEL'_daily.grib'
     OUT_1=$DIR'mexico_'$VAR'_'$LEVEL'_daily_mean.grib'
-    OUT_2=$DIR'mexico_'$VAR'_'$LEVEL'_daily_anom.grib'
+    #OUT_2=$DIR'mexico_'$VAR'_'$LEVEL'_daily_anom.grib'
 
     # Merge all years and calculate multi-year daily means.
     cdo mergetime $FILES $IN
     cdo  ydaymean $IN    $OUT_1
-    cdo   ydaysub $IN    $OUT_1 $OUT_2
+    #cdo   ydaysub $IN    $OUT_1 $OUT_2
     rm -r $DIR_TEMP
 
     echo ""
@@ -123,12 +123,12 @@ then
     FILES=$DIR_TEMP'*.grib'
     IN=$DIR'mexico_'$VAR'_daily.grib'
     OUT_1=$DIR'mexico_'$VAR'_daily_mean.grib'
-    OUT_2=$DIR'mexico_'$VAR'_daily_anom.grib'
+    #OUT_2=$DIR'mexico_'$VAR'_daily_anom.grib'
 
     # Merge all years and calculate multi-year daily means.
     cdo mergetime $FILES $IN
     cdo  ydaymean $IN    $OUT_1
-    cdo   ydaysub $IN    $OUT_1 $OUT_2
+    #cdo   ydaysub $IN    $OUT_1 $OUT_2
     rm -r $DIR_TEMP
 
     echo ""
