@@ -9,7 +9,7 @@ import cdsapi
 vars = [
     "mean_top_net_long_wave_radiation_flux", 
     "sea_surface_temperature",
-    "surface_pressure",
+    "mean_sea_level_pressure",
     "vertical_integral_of_divergence_of_moisture_flux",
     "vertical_integral_of_eastward_water_vapour_flux",
     "vertical_integral_of_northward_water_vapour_flux",
@@ -18,7 +18,7 @@ vars = [
 # Nombre de la base de datos.
 dataset = "reanalysis-era5-single-levels"
 # Nombre corto de las variables.
-svars = [ "olr", "sst", "sp", "vidmf", "vivfu", "vivfv", "VIDMFI" ]
+svars = [ "olr", "sst", "slp", "vidmf", "vivfu", "vivfv", "VIDMFI" ]
 
 # Escogemos la variable de acuerdo con
 # el argumento de la línea de comando.
