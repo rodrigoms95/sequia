@@ -10,10 +10,14 @@ source $CONDA_SOURCE'/etc/profile.d/conda.sh'
 conda activate gv
 
 D='20'
-VAR_L=( 'u' 'v' 'gp' 'q' )
-VAR_S=( 'sst' 'olr' 'sp' 'vidmf' 'vivfu' 'vivfv' )
-LEVEL=( '925' '700' '500' '200' )
-ANOM=( '.' '_anom.' )
+#VAR_L=( 'u' 'v' 'gp' 'q' )
+#VAR_S=( 'sst' 'olr' 'slp' 'vidmf' 'vivfu' 'vivfv' )
+#LEVEL=( '925' '700' '500' '200' )
+VAR_L=( 'gp' )
+#VAR_S=( 'sst' 'olr' 'slp' 'vidmf' 'vivfu' 'vivfv' )
+LEVEL=( '500' )
+ANOM=( '.' )
+#ANOM=( '.' '_anom.' )
 
 for v in ${VAR_L[@]}
 do
