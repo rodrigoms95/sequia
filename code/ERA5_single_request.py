@@ -13,12 +13,13 @@ vars = [
     "vertical_integral_of_divergence_of_moisture_flux",
     "vertical_integral_of_eastward_water_vapour_flux",
     "vertical_integral_of_northward_water_vapour_flux",
-    "vertically_integrated_moisture_divergence"
+    "vertically_integrated_moisture_divergence",
+    "geopotential"
     ]
 # Nombre de la base de datos.
 dataset = "reanalysis-era5-single-levels"
 # Nombre corto de las variables.
-svars = [ "olr", "sst", "slp", "vidmf", "vivfu", "vivfv", "VIDMFI" ]
+svars = [ "olr", "sst", "slp", "vidmf", "vivfu", "vivfv", "VIDMFI", "gp" ]
 
 # Escogemos la variable de acuerdo con
 # el argumento de la línea de comando.
@@ -43,10 +44,16 @@ if not ( year[1] in range(1981, 2023) ):
     raise ValueError( "Año final inválido." )
 
 # Escogemos todos los meses, días, y horas.
-years  = list( map( lambda x: f"{x}", range( year[0], year[1] ) ) )
-months = list( map( lambda x: f"{x:02d}", range(1, 13) ) )
-days   = list( map( lambda x: f"{x:02d}", range(1, 32) ) )
-hours  = list( map( lambda x: f"{x:02d}:00", range(0, 24, 12) ) )
+if var != "geopotential":
+    years  = list( map( lambda x: f"{x}", range( year[0], year[1] ) ) )
+    months = list( map( lambda x: f"{x:02d}", range(1, 13) ) )
+    days   = list( map( lambda x: f"{x:02d}", range(1, 32) ) )
+    hours  = list( map( lambda x: f"{x:02d}:00", range(0, 24, 12) ) )
+else:
+    years  = ["2000"]
+    months = ["1"]
+    days   = ["1"]
+    hours  = ["0"]
 
 # Región en la que se descargan los datos.
 # Formato: ymax, xmin, ymin, xmax 
